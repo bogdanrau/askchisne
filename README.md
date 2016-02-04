@@ -60,7 +60,7 @@ The following functions can be used to query the AskCHIS NE API:
 > `getMetadata()` function obtains all of the metadata available in AskCHIS NE. This function has only one simple call:
 
 ``` r
-getMetadata(apiKey = 'YOUR API KEY')
+getMetadata(apiKey = '<YOUR API KEY>')
 ```
 
 The resulting data frame will contain:
@@ -82,7 +82,7 @@ The resulting data frame will contain:
 > `geoSearch()` function searches the API for all available geographic locations matching the search string. The function requires a search string and the API key:
 
 ``` r
-geoSearch(search = 'YOUR SEARCH TERM', apiKey = 'YOUR API KEY'>)
+geoSearch(search = 'YOUR SEARCH TERM', apiKey = '<YOUR API KEY>')
 ```
 
 The resulting data frame will contain:
@@ -98,7 +98,7 @@ The resulting data frame will contain:
 > `getEstimate()` function retrieves estimates as well as additional statistical attributes for one or more requested locations:
 
 ``` r
-geoSearch(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, locations = NULL, apiKey = 'YOUR API KEY')
+geoSearch(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, locations = NULL, apiKey = '<YOUR API KEY>')
 ```
 
 <table style="width:56%;">
@@ -163,7 +163,7 @@ The resulting data frame will contain:
 > `poolEstimate()` function combines multiple locations and returns the pooled estimate for those locations.
 
 ``` r
-poolEstimate(indicator = 'INDICATOR NAME', attributes = NULL, locations = 'LIST OF LOCATION geoIds', apyKey = 'YOUR API KEY')
+poolEstimate(indicator = 'INDICATOR NAME', attributes = NULL, locations = 'LIST OF LOCATION geoIds', apyKey = '<YOUR API KEY>')
 ```
 
 The resulting data frame will contain the same columns as the response from `getEstimate()`. with the difference that `poolEstimate()` returns pooled locations, not individual locations.

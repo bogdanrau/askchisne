@@ -7,7 +7,7 @@
 #' @keywords askchis chis
 #' @export
 #' @examples 
-#' geoSearch(search = 'Los Angeles', apiKey = <YOUR API KEY>)
+#' geoSearch(search = 'Los Angeles', apiKey = '<YOUR API KEY>')
 #' Returns a data frame with all locations that match 'Los Angeles.'
 geoSearch <- function(search, apiKey) {
   require(httr)

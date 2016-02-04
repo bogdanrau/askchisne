@@ -6,7 +6,7 @@
 #' @keywords askchis chis
 #' @export
 #' @examples 
-#' getMetadata(apiKey = <YOUR API KEY>)
+#' getMetadata(apiKey = '<YOUR API KEY>')
 #' Returns a data frame with all of the metadata in AskCHIS NE.
 getMetadata <- function(apiKey) {
   require(httr)

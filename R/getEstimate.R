@@ -10,7 +10,7 @@
 #' @keywords askchis chis
 #' @export
 #' @examples 
-#' getEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000', apiKey = <YOUR API KEY>)
+#' getEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000', apiKey = '<YOUR API KEY>')
 #' Returns a data frame with adult obesity estimates and populations for Los Angeles and San Diego cities.
 getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations = NULL, apiKey) {
   require(httr)
