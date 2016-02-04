@@ -1,12 +1,16 @@
 Package: askchisne
+Type: Package
 Title: Get estimates from the AskCHIS NE API
-Version: 0.0.0.9000
-Authors@R: person("Bogdan", "Rau", email = "bogdan.rau@gmail.com", role = c("aut", "cre"))
+Version: 0.1.0
+Authors: Bogdan Rau
+Maintainer: Bogdan Rau <bogdan.rau@gmail.com>
 Description: AskCHIS Neighborhood Edition (or AskCHIS NE) is a data discovery
     and visualization platform powered by data from the California Health Interview
     Survey (CHIS). The askchisne package provides easy functions for retrieval of
     estimates and data attributes from the AskCHIS NE database. An AskCHIS NE API
     key is required.
+URL: https://github.com/bogdanrau/askchisne
+BugReports: https://github.com/bogdanrau/askchisne/issues
 Depends:
     R (>= 3.2.3)
 License: GPL (>= 2)
