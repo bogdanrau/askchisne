@@ -1,3 +1,17 @@
+#' Get AskCHIS NE Estimates
+#' 
+#' This function gets data from the AskCHIS NE API. If attributes = null, it will
+#' return the population, estimate, as well as other statistical attributes.
+#' @param indicator The indicator id (can be obtained using getMetadata()) (required).
+#' @param attributes The specific attributes requested. A list that can include: estimate, population, SE, CI_L95, CI_U95, CV, MSE. Will return all if not specified (optional).
+#' @param geoLevel The specific level of geography requested. A list that can include: zcta, cities, counties, assembly, congress, senate, state (optional).
+#' @param locations The specific locations requested. A list that must include geoIds (can be obtained from geoSearch()) (optional).
+#' @param apiKey Your API key (required).
+#' @keywords askchis chis
+#' @export
+#' @examples 
+#' getEstimate(indicator = 'OBESEA', attributes = list('estimate','population'), locations = list('666000','644000'), apiKey = <YOUR API KEY>)
+#' Returns a data frame with adult obesity estimates and populations for Los Angeles and San Diego cities.
 getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations = NULL, apiKey) {
   url <- paste0("http://askchisne.azure-api.net/api/variable/", indicator)
   data <- data.frame(t(sapply(content(GET(url, 
