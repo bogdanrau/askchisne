@@ -29,11 +29,11 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   }
   
   if (is.null(attributes)) {
-    warning("No attributes specified. Returning all attributes.", call. = FALSE)
+    warning("No attributes specified. Returning all attributes.", call. = FALSE, immediate. = TRUE)
   }
   
   if (is.null(c(geoLevel, locations))) {
-    warning("No geoLevel or location specified. Returning data for all possible locations. This might take a while...", call. = FALSE)
+    warning("No geoLevel or location specified. Returning data for all possible locations. This might take a while...", call. = FALSE, immediate. = TRUE)
   }
   
   url <- paste0("http://askchisne.azure-api.net/api/variable/", indicator)
