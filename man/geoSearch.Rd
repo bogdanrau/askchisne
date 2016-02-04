@@ -2,9 +2,7 @@
 % Please edit documentation in R/geoSearch.R
 \name{geoSearch}
 \alias{geoSearch}
-\title{Search locations by name
-Use this function to search for locations within the AskCHIS NE database
-by name and obtain geoId, and location type.}
+\title{Search locations by name.}
 \usage{
 geoSearch(search, apiKey)
 }
@@ -14,7 +12,6 @@ geoSearch(search, apiKey)
 \item{apiKey}{Your API key (required).}
 }
 \description{
-Search locations by name
 Use this function to search for locations within the AskCHIS NE database
 by name and obtain geoId, and location type.
 }

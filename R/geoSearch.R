@@ -1,4 +1,5 @@
-#' Search locations by name
+#' Search locations by name.
+#' 
 #' Use this function to search for locations within the AskCHIS NE database
 #' by name and obtain geoId, and location type.
 #' @param search Search term (required).
