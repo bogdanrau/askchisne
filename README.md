@@ -22,7 +22,7 @@ Before using this package, you must obtain an API key from the [California Healt
 Base Functions
 --------------
 
-`getMetadata()` function obtains all of the metadata available in AskCHIS NE. This function has only one simple call:
+> `getMetadata()` function obtains all of the metadata available in AskCHIS NE. This function has only one simple call:
 
 ``` r
 getMetadata(apiKey = '<YOUR API KEY>')

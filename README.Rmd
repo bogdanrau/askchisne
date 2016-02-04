@@ -26,7 +26,7 @@ You will use the API key in all functions to connect to the API and get data.
 
 Base Functions
 --------------
-`getMetadata()` function obtains all of the metadata available in AskCHIS NE. This function has only
+> `getMetadata()` function obtains all of the metadata available in AskCHIS NE. This function has only
 one simple call:
 ```r
 getMetadata(apiKey = '<YOUR API KEY>')
@@ -45,4 +45,5 @@ The resulting data frame will contain:
 
 * `description`: a description of the indicator and link to additional resources if non-CHIS.
 
------------
+***
+
