@@ -1,4 +1,6 @@
 poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
+  require(httr)
+  
   url <- paste0("http://askchisne.azure-api.net/api/variablepool/", indicator)
   data <- data.frame(t(sapply(content(GET(url, 
                                           query = list(

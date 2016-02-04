@@ -9,6 +9,8 @@
 #' getMetadata(apiKey = <YOUR API KEY>)
 #' Returns a data frame with all of the metadata in AskCHIS NE.
 getMetadata <- function(apiKey) {
+  require(httr)
+  
   url <- "http://askchisne.azure-api.net/api/metadata"
   data <- data.frame(t(sapply(content(GET(url, query = list(key = apiKey)), as = "parsed"), c)))
   removeCols <- c("dataSetId", "geoVariableMetadataId", "sourceVariable", "topic")

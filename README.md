@@ -44,8 +44,18 @@ The following functions can be used to query the AskCHIS NE API:
 <td align="left"><code>geoSearch()</code></td>
 <td align="left">Returns available locations for a search term.</td>
 </tr>
+<tr class="odd">
+<td align="left"><code>getEstimate()</code></td>
+<td align="left">Returns estimate and attributes for one or more locations in the database.</td>
+</tr>
+<tr class="even">
+<td align="left"><code>poolEstimate()</code></td>
+<td align="left">Pools estimates for two or more locations.</td>
+</tr>
 </tbody>
 </table>
+
+------------------------------------------------------------------------
 
 > `getMetadata()` function obtains all of the metadata available in AskCHIS NE. This function has only one simple call:
 
@@ -82,3 +92,42 @@ The resulting data frame will contain:
 -   `name`: the location name.
 
 -   `geoType`: the type of location. This can be a zip code (ZCTA), a city (CITIES), a county (COUNTIES, a legislative district (ASSEMBLY, CONGRESS, SENATE), or the state (STATE).
+
+------------------------------------------------------------------------
+
+> `getEstimate()` function retrieves estimates as well as additional statistical attributes for one or more requested locations:
+
+``` r
+geoSearch(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, locations = NULL, apiKey = 'YOUR API KEY')
+```
+
+<table style="width:56%;">
+<colgroup>
+<col width="26%" />
+<col width="29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Parameter</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">indicator</td>
+<td align="left">The name of the indicator, which can be obtained using the getMetadata function.</td>
+</tr>
+<tr class="even">
+<td align="left">attributes</td>
+<td align="left">If not specified, returns all available attributes: estimate, population, SE, CI_LB95, CI_UB95, CV, MSE.</td>
+</tr>
+<tr class="odd">
+<td align="left">geoLevel</td>
+<td align="left">The level of geography for the query: zcta, cities, counties, assembly, congress, senate, state.</td>
+</tr>
+<tr class="even">
+<td align="left">locations</td>
+<td align="left">A list of geoIds for each location queried (can use the geoSearch() function to obtain those).</td>
+</tr>
+</tbody>
+</table>

@@ -10,6 +10,8 @@
 #' geoSearch(search = 'Los Angeles', apiKey = <YOUR API KEY>)
 #' Returns a data frame with all locations that match 'Los Angeles.'
 geoSearch <- function(search, apiKey) {
+  require(httr)
+  
   url <- "http://askchisne.azure-api.net/api/geosearch"
   data <- data.frame(t(sapply(content(GET(url, query = list(searchTerm = search, key = apiKey)), as = "parsed"), c)))
   removeCols <- c("year", "totalPopulation", "variables")

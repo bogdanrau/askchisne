@@ -32,6 +32,10 @@ Function                  | Description
 --------------------------|-----------------------------------------------------
 `getMetadata()`           | Obtains all of the metadata from AskCHIS NE.
 `geoSearch()`             | Returns available locations for a search term.
+`getEstimate()`           | Returns estimate and attributes for one or more locations in the database.
+`poolEstimate()`          | Pools estimates for two or more locations.
+
+***
 
 > `getMetadata()` function obtains all of the metadata available in AskCHIS NE. This function has only
 one simple call:
@@ -70,3 +74,17 @@ The resulting data frame will contain:
 * `geoType`: the type of location. This can be a zip code (ZCTA), a city (CITIES), a county (COUNTIES,
 a legislative district (ASSEMBLY, CONGRESS, SENATE), or the state (STATE).
 
+***
+
+> `getEstimate()` function retrieves estimates as well as additional statistical attributes for one or more
+requested locations:
+```R
+geoSearch(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, locations = NULL, apiKey = 'YOUR API KEY')
+```
+
+Parameter         | Description
+------------------|--------------------
+indicator         | The name of the indicator, which can be obtained using the getMetadata function.
+attributes        | If not specified, returns all available attributes: estimate, population, SE, CI_LB95, CI_UB95, CV, MSE.
+geoLevel          | The level of geography for the query: zcta, cities, counties, assembly, congress, senate, state.
+locations         | A list of geoIds for each location queried (can use the geoSearch() function to obtain those).
