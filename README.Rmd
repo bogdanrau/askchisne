@@ -87,7 +87,7 @@ Parameter         | Description
 indicator         | The name of the indicator, which can be obtained using the getMetadata function.
 attributes        | If not specified, returns all available attributes: estimate, population, SE, CI_LB95, CI_UB95, CV, MSE.
 geoLevel          | The level of geography for the query: zcta, cities, counties, assembly, congress, senate, state.
-locations         | A list of geoIds for each location queried (can use the geoSearch() function to obtain those).
+locations         | A comma separated list of geoIds for each location queried (can use the geoSearch() function to obtain those).
 
 The resulting data frame will contain:
 

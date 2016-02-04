@@ -10,11 +10,11 @@ getEstimate(indicator, attributes = NULL, geoLevel = NULL,
 \arguments{
 \item{indicator}{The indicator id (can be obtained using getMetadata()) (required).}
 
-\item{attributes}{The specific attributes requested. A list that can include: estimate, population, SE, CI_L95, CI_U95, CV, MSE. Will return all if not specified (optional).}
+\item{attributes}{The specific attributes requested. A comma separated list that can include: estimate, population, SE, CI_L95, CI_U95, CV, MSE. Will return all if not specified (optional).}
 
 \item{geoLevel}{The specific level of geography requested. A list that can include: zcta, cities, counties, assembly, congress, senate, state (optional).}
 
-\item{locations}{The specific locations requested. A list that must include geoIds (can be obtained from geoSearch()) (optional).}
+\item{locations}{The specific locations requested. A comma separated list that must include geoIds (can be obtained from geoSearch()) (optional).}
 
 \item{apiKey}{Your API key (required).}
 }
@@ -23,7 +23,7 @@ This function gets data from the AskCHIS NE API. If attributes = null, it will
 return the population, estimate, as well as other statistical attributes.
 }
 \examples{
-getEstimate(indicator = 'OBESEA', attributes = list('estimate','population'), locations = list('666000','644000'), apiKey = <YOUR API KEY>)
+getEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000', apiKey = <YOUR API KEY>)
 Returns a data frame with adult obesity estimates and populations for Los Angeles and San Diego cities.
 }
 \keyword{askchis}

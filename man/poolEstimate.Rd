@@ -9,9 +9,9 @@ poolEstimate(indicator, attributes = NULL, locations, apiKey)
 \arguments{
 \item{indicator}{The indicator id (can be obtained using getMetadata()) (required).}
 
-\item{attributes}{The specific attributes requested. A list that can include: estimate, population, SE, CI_L95, CI_U95, CV, MSE. Will return all if not specified (optional).}
+\item{attributes}{The specific attributes requested. A comma separated list that can include: estimate, population, SE, CI_L95, CI_U95, CV, MSE. Will return all if not specified (optional).}
 
-\item{locations}{The specific locations requested to be pooled. A list that must include geoIds (can be obtained from geoSearch()) (required).}
+\item{locations}{The specific locations requested to be pooled. A comma separated list that must include geoIds (can be obtained from geoSearch()) (required).}
 
 \item{apiKey}{Your API key (required).}
 }
@@ -20,7 +20,7 @@ This function combines estimates for multiple geographic locations and is especi
 useful in combining multiple locations that might have suppressed estimates to get an overall estimate.
 }
 \examples{
-poolEstimate(indicator = 'OBESEA', attributes = list('estimate','population'), locations = list('666000','644000'), apiKey = <YOUR API KEY>)
+poolEstimate(indicator = 'OBESEA', attributes = 'estimate,population'), locations = '666000,644000', apiKey = <YOUR API KEY>)
 Returns a data frame with adult obesity estimates and populations for Los Angeles and San Diego cities COMBINED.
 }
 \keyword{askchis}

@@ -127,7 +127,7 @@ geoSearch(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, loca
 </tr>
 <tr class="even">
 <td align="left">locations</td>
-<td align="left">A list of geoIds for each location queried (can use the geoSearch() function to obtain those).</td>
+<td align="left">A comma separated list of geoIds for each location queried (can use the geoSearch() function to obtain those).</td>
 </tr>
 </tbody>
 </table>
