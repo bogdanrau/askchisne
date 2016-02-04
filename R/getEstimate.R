@@ -49,10 +49,9 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   )
   
   # Send warning messages if data frame contains suppressed cells
-  if(any(is.na(finalData))) warning("
-    Some estimates have been suppressed. Estimates are suppressed if the
-    population universe is less than 15,000, or if the coefficient of variation
-    is greater than 0.3.", call. = FALSE)
+  if(any(is.na(finalData))) warning("Some estimates have been suppressed. Estimates are suppressed if the
+population universe is less than 15,000, or if the coefficient of variation
+is greater than 0.3.", call. = FALSE)
   
   # Reset row names and numbers
   rownames(finalData) <- seq(length = nrow(finalData))
