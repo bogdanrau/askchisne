@@ -131,3 +131,29 @@ geoSearch(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, loca
 </tr>
 </tbody>
 </table>
+
+The resulting data frame will contain:
+
+-   `geoId`: the geoIds for all locations returned.
+
+-   `geoName`: the name of all of the locations returned.
+
+-   `geoTypeId`: the type of location returned (zip code, city, etc.).
+
+-   `isSuppressed`: a TRUE/FALSE describing whether the estimate is suppressed.
+
+-   `suppressionReason`: description of reason for suppression.
+
+-   `population`: the population universe for that specific indicator.
+
+-   `estimate`: the estimate for that indicator.
+
+-   `SE`: the Standard Error (SE) for that indicator.
+
+-   `CI_LB95`: the lower bound of the 95% Confidence Interval.
+
+-   `CI_UB95`: the upper bound of the 95% Confidence Interval.
+
+-   `CV`: the Coefficient of Variation.
+
+-   `MSE`: the Mean Square Error.

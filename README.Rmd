@@ -88,3 +88,29 @@ indicator         | The name of the indicator, which can be obtained using the g
 attributes        | If not specified, returns all available attributes: estimate, population, SE, CI_LB95, CI_UB95, CV, MSE.
 geoLevel          | The level of geography for the query: zcta, cities, counties, assembly, congress, senate, state.
 locations         | A list of geoIds for each location queried (can use the geoSearch() function to obtain those).
+
+The resulting data frame will contain:
+
+* `geoId`: the geoIds for all locations returned.
+
+* `geoName`: the name of all of the locations returned.
+
+* `geoTypeId`: the type of location returned (zip code, city, etc.).
+
+* `isSuppressed`: a TRUE/FALSE describing whether the estimate is suppressed.
+
+* `suppressionReason`: description of reason for suppression.
+
+* `population`: the population universe for that specific indicator.
+
+* `estimate`: the estimate for that indicator.
+
+* `SE`: the Standard Error (SE) for that indicator.
+
+* `CI_LB95`: the lower bound of the 95% Confidence Interval.
+
+* `CI_UB95`: the upper bound of the 95% Confidence Interval.
+
+* `CV`: the Coefficient of Variation.
+
+* `MSE`: the Mean Square Error.
