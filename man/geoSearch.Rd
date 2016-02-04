@@ -2,7 +2,7 @@
 % Please edit documentation in R/geoSearch.R
 \name{geoSearch}
 \alias{geoSearch}
-\title{Search locations by name.}
+\title{Search locations by name}
 \usage{
 geoSearch(search, apiKey)
 }
@@ -17,8 +17,7 @@ by name and obtain geoId, and location type.
 }
 \examples{
 geoSearch(search = 'Los Angeles', apiKey = <YOUR API KEY>)
-Returns all locations that match 'Los Angeles'
-
+Returns a data frame with all locations that match 'Los Angeles.'
 }
 \keyword{askchis}
 \keyword{chis}

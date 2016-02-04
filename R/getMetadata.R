@@ -1,3 +1,14 @@
+#' Get AskCHIS NE Metadata
+#' 
+#' This function obtains all of the metadata available in AskCHIS NE. This includes
+#' indicator labels, categories, variable years etc.
+#' @param apiKey Your API key (required).
+#' @keywords askchis chis
+#' @export
+#' @examples 
+#' getMetadata(apiKey = <YOUR API KEY>)
+#' Returns a data frame with all of the metadata in AskCHIS NE.
+
 getMetadata <- function(apiKey) {
   url <- "http://askchisne.azure-api.net/api/metadata"
   data <- data.frame(t(sapply(content(GET(url, query = list(key = apiKey)), as = "parsed"), c)))
