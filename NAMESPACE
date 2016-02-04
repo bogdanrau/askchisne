@@ -3,3 +3,4 @@
 export(geoSearch)
 export(getEstimate)
 export(getMetadata)
+export(poolEstimate)

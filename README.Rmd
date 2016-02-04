@@ -114,3 +114,12 @@ The resulting data frame will contain:
 * `CV`: the Coefficient of Variation.
 
 * `MSE`: the Mean Square Error.
+
+***
+
+> `poolEstimate()` function combines multiple locations and returns the pooled estimate for those locations.
+```r
+poolEstimate(indicator = 'INDICATOR NAME', attributes = NULL, locations = 'LIST OF LOCATION geoIds', apyKey = 'YOUR API KEY')
+```
+
+The resulting data frame will contain the same columns as the response from `getEstimate()`. with the difference that `poolEstimate()` returns pooled locations, not individual locations.

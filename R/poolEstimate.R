@@ -1,3 +1,16 @@
+#' Pool AskCHIS NE Estimates
+#' 
+#' This function combines estimates for multiple geographic locations and is especially
+#' useful in combining multiple locations that might have suppressed estimates to get an overall estimate.
+#' @param indicator The indicator id (can be obtained using getMetadata()) (required).
+#' @param attributes The specific attributes requested. A list that can include: estimate, population, SE, CI_L95, CI_U95, CV, MSE. Will return all if not specified (optional).
+#' @param locations The specific locations requested to be pooled. A list that must include geoIds (can be obtained from geoSearch()) (required).
+#' @param apiKey Your API key (required).
+#' @keywords askchis chis
+#' @export
+#' @examples 
+#' poolEstimate(indicator = 'OBESEA', attributes = list('estimate','population'), locations = list('666000','644000'), apiKey = <YOUR API KEY>)
+#' Returns a data frame with adult obesity estimates and populations for Los Angeles and San Diego cities COMBINED.
 poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
   require(httr)
   
