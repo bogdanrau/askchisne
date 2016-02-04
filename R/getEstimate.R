@@ -15,6 +15,27 @@
 getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations = NULL, apiKey) {
   require(httr)
   
+  # Error definitions
+  if (missing(apiKey)) {
+    stop("NO API KEY: You did not specify an API key. If you don't already have one, please contact askchis@ucla.edu to obtain an API key.", call. = FALSE)
+  }
+  
+  if (missing(indicator)) {
+    stop("NO INDICATOR: You did not specify an indicator. Please specify an indicator name. See the name column from a getMetadata() data frame.", call. = FALSE)
+  }
+  
+  if (indicator == "") {
+    stop("EMPTY INDICATOR TERM: Your indicator parameter was empty. Please specify a value for the indicator parameter.")
+  }
+  
+  if (is.null(attributes)) {
+    warning("No attributes specified. Returning all attributes.", call. = FALSE)
+  }
+  
+  if (is.null(c(geoLevel, locations))) {
+    warning("No geoLevel or location specified. Returning data for all possible locations. This might take a while...", call. = FALSE)
+  }
+  
   url <- paste0("http://askchisne.azure-api.net/api/variable/", indicator)
   data <- data.frame(t(sapply(content(GET(url, 
                                           query = list(
