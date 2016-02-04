@@ -11,8 +11,9 @@
 getMetadata <- function(apiKey) {
   require(httr)
   
+  # Error definitions
   if (missing(apiKey)) {
-    stop("You did not specify an API key. If you don't already have one, please contact askchis@ucla.edu to obtain an API key.")
+    stop("NO API KEY: You did not specify an API key. If you don't already have one, please contact askchis@ucla.edu to obtain an API key.", call. = FALSE)
   }
   
   url <- "http://askchisne.azure-api.net/api/metadata"
