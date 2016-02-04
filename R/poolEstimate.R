@@ -1,10 +1,9 @@
-getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations = NULL, apiKey) {
-  url <- paste0("http://askchisne.azure-api.net/api/variable/", indicator)
+poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
+  url <- paste0("http://askchisne.azure-api.net/api/variablepool/", indicator)
   data <- data.frame(t(sapply(content(GET(url, 
                                           query = list(
                                             key = apiKey,
                                             attributes = attributes,
-                                            geoType = geoLevel,
                                             geoIds = locations
                                           ))),c)))
   
@@ -43,9 +42,9 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   }
   
   suppressWarnings(
-  for (l in numerics) {
-    finalData[[l]] <- as.numeric(as.character(finalData[[l]]))
-  }
+    for (l in numerics) {
+      finalData[[l]] <- as.numeric(as.character(finalData[[l]]))
+    }
   )
   
   # Send warning messages if data frame contains suppressed cells
