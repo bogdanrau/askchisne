@@ -11,6 +11,10 @@
 getMetadata <- function(apiKey) {
   require(httr)
   
+  if (missing(apiKey)) {
+    stop("You did not specify an API key. If you don't already have one, please contact askchis@ucla.edu to obtain an API key.")
+  }
+  
   url <- "http://askchisne.azure-api.net/api/metadata"
   data <- data.frame(t(sapply(content(GET(url, query = list(key = apiKey)), as = "parsed"), c)))
   removeCols <- c("dataSetId", "geoVariableMetadataId", "sourceVariable", "topic")
