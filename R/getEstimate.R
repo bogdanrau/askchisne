@@ -13,7 +13,6 @@
 #' getEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000', apiKey = '<YOUR API KEY>')
 #' Returns a data frame with adult obesity estimates and populations for Los Angeles and San Diego cities.
 getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations = NULL, apiKey) {
-  require(httr)
   
   # Error definitions
   if (missing(apiKey)) {
@@ -37,13 +36,13 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   }
   
   url <- paste0("http://askchisne.azure-api.net/api/variable/", indicator)
-  data <- data.frame(t(sapply(content(GET(url, 
-                                          query = list(
-                                            key = apiKey,
-                                            attributes = attributes,
-                                            geoType = geoLevel,
-                                            geoIds = locations
-                                          ))),c)))
+  data <- data.frame(t(sapply(content(httr::GET(url,
+                                                query = list(
+                                                  key = apiKey,
+                                                  attributes = attributes,
+                                                  geoType = geoLevel,
+                                                  geoIds = locations
+                                                  ))),c)))
   
   # Extract attribute types
   data.attributes <- data.frame(t(sapply(data$attributeTypes,c)))
