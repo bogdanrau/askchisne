@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bogdanrau/askchisne.svg?branch=master)](https://travis-ci.org/bogdanrau/askchisne)
+
 askchisne
 =========
 
