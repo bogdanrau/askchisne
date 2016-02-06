@@ -9,8 +9,10 @@
 #' @keywords askchis chis
 #' @export
 #' @examples 
+#' \dontrun{
 #' poolEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000', apiKey = '<YOUR API KEY>')
 #' Returns a data frame with adult obesity estimates and populations for Los Angeles and San Diego cities COMBINED.
+#' }
 poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
   
   # Error definitions

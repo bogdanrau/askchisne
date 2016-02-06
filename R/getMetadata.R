@@ -5,9 +5,11 @@
 #' @param apiKey Your API key (required).
 #' @keywords askchis chis
 #' @export
-#' @examples 
+#' @examples
+#' \dontrun{
 #' getMetadata(apiKey = '<YOUR API KEY>')
 #' Returns a data frame with all of the metadata in AskCHIS NE.
+#' }
 getMetadata <- function(apiKey) {
   
   # Error definitions

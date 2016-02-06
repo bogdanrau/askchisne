@@ -23,8 +23,10 @@ This function gets data from the AskCHIS NE API. If attributes = null, it will
 return the population, estimate, as well as other statistical attributes.
 }
 \examples{
+\dontrun {
 getEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000', apiKey = '<YOUR API KEY>')
 Returns a data frame with adult obesity estimates and populations for Los Angeles and San Diego cities.
+}
 }
 \keyword{askchis}
 \keyword{chis}
