@@ -5,6 +5,7 @@
 #' @param search Search term (required).
 #' @param apiKey Your API key (required).
 #' @keywords askchis chis
+#' @import httr
 #' @export
 #' @examples 
 #' \dontrun{

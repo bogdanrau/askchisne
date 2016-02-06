@@ -7,11 +7,14 @@
 #' @param locations The specific locations requested to be pooled. A comma separated list that must include geoIds (can be obtained from geoSearch()) (required).
 #' @param apiKey Your API key (required).
 #' @keywords askchis chis
+#' @import httr
 #' @export
 #' @examples 
 #' \dontrun{
-#' poolEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000', apiKey = '<YOUR API KEY>')
-#' # Returns a data frame with adult obesity estimates and populations for Los Angeles and San Diego cities COMBINED.
+#' poolEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000',
+#' apiKey = '<YOUR API KEY>')
+#' # Returns a data frame with adult obesity estimates and populations for Los Angeles and
+#' # San Diego cities COMBINED.
 #' }
 poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
   
@@ -41,6 +44,7 @@ poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
                                                 query = list(
                                                   key = apiKey,
                                                   attributes = attributes,
+                                                  geoIds = locations
                                                   ))),c)))
   
   # Extract attribute types

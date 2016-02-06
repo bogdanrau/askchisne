@@ -4,6 +4,7 @@
 #' indicator labels, categories, variable years etc.
 #' @param apiKey Your API key (required).
 #' @keywords askchis chis
+#' @import httr
 #' @export
 #' @examples
 #' \dontrun{

@@ -8,11 +8,14 @@
 #' @param locations The specific locations requested. A comma separated list that must include geoIds (can be obtained from geoSearch()) (optional).
 #' @param apiKey Your API key (required).
 #' @keywords askchis chis
+#' @import httr
 #' @export
 #' @examples 
-#' \dontrun {
-#' getEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000', apiKey = '<YOUR API KEY>')
-#' # Returns a data frame with adult obesity estimates and populations for Los Angeles and San Diego cities.
+#' \dontrun{
+#' getEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000',
+#'  apiKey = '<YOUR API KEY>')
+#' # Returns a data frame with adult obesity estimates and populations for Los Angeles and
+#' # San Diego cities.
 #' }
 getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations = NULL, apiKey) {
   
