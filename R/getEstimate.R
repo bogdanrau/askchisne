@@ -8,7 +8,6 @@
 #' @param locations The specific locations requested. A comma separated list that must include geoIds (can be obtained from geoSearch()) (optional).
 #' @param apiKey Your API key (required).
 #' @keywords askchis chis
-#' @import httr
 #' @export
 #' @examples 
 #' \dontrun{
