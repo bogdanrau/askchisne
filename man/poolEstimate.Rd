@@ -22,7 +22,7 @@ useful in combining multiple locations that might have suppressed estimates to g
 \examples{
 \dontrun{
 poolEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000', apiKey = '<YOUR API KEY>')
-Returns a data frame with adult obesity estimates and populations for Los Angeles and San Diego cities COMBINED.
+# Returns a data frame with adult obesity estimates and populations for Los Angeles and San Diego cities COMBINED.
 }
 }
 \keyword{askchis}

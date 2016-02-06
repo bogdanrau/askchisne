@@ -18,7 +18,7 @@ by name and obtain geoId, and location type.
 \examples{
 \dontrun{
 geoSearch(search = 'Los Angeles', apiKey = '<YOUR API KEY>')
-Returns a data frame with all locations that match 'Los Angeles.'
+# Returns a data frame with all locations that match 'Los Angeles.'
 }
 }
 \keyword{askchis}

@@ -16,7 +16,7 @@ indicator labels, categories, variable years etc.
 \examples{
 \dontrun{
 getMetadata(apiKey = '<YOUR API KEY>')
-Returns a data frame with all of the metadata in AskCHIS NE.
+# Returns a data frame with all of the metadata in AskCHIS NE.
 }
 }
 \keyword{askchis}
