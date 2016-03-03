@@ -69,7 +69,7 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   data.geographies <- data.frame(t(sapply(data$geographies[[1]],c)))
   
   # Extract attribute values
-  if (length(attributes) > 1) {
+  if (length(attributes) > 1 | is.null(attributes)) {
     data.values <- data.frame(t(sapply(data.geographies$attributes, c)))
   } else {
     data.values <- data.frame(unlist(data.geographies$attributes))
@@ -80,19 +80,31 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
     data.values[[i]] <- unlist(data.values[[i]])
   }
   
+  
   # Set column names to attributes
+  characters <- list("geoName", "suppressionReason")
+  factors <- list("geoId", "geoTypeId")
+  booleans <- list("isSuppressed")
+  numerics <- list("population", "estimate", "SE", "CI_LB95", "CI_UB95", "CV", "MSE")
+  
+  if (!is.null(attributes)) {
   colnames(data.values) <- unlist(attributes)
+  } else {
+    colnames(data.values) <- unlist(numerics)
+  }
   
   # Create final dataset
   finalData <- cbind(data.geographies, data.values)
   finalData$attributes <- NULL
   
   # Convert columns to appropriate types
-  characters <- list("geoName", "suppressionReason")
-  factors <- list("geoId", "geoTypeId")
-  booleans <- list("isSuppressed")
-  numerics <- list("population", "estimate", "SE", "CI_LB95", "CI_UB95", "CV", "MSE")
-  numericsPresent <- numerics[match(attributes, numerics)]
+  
+  if (is.null(attributes)) {
+    numericsPresent <- numerics
+  } else {
+    numericsPresent <- numerics[match(attributes, numerics)]
+  }
+  
   
   for (i in characters) {
     finalData[[i]] <- as.character(finalData[[i]])
