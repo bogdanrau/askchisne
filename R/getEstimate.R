@@ -11,7 +11,7 @@
 #' @export
 #' @examples 
 #' \dontrun{
-#' getEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000',
+#' getEstimate(indicator = 'OBESEA', attributes = list("estimate", "population"), locations = list("666000", "644000"),
 #'  apiKey = '<YOUR API KEY>')
 #' # Returns a data frame with adult obesity estimates and populations for Los Angeles and
 #' # San Diego cities.
@@ -40,25 +40,40 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   }
   
   url <- paste0("http://askchisne.azure-api.net/api/variable/", indicator)
+  
+  # Collapse attribute list 
+  attributeList <- paste0(attributes, collapse = ",")
+  locationsList <- paste0(locations, collapse = ",")
+  
+  
   data <- data.frame(t(sapply(content(httr::GET(url,
                                                 query = list(
                                                   key = apiKey,
-                                                  attributes = attributes,
+                                                  attributes = attributeList,
                                                   geoType = geoLevel,
-                                                  geoIds = locations
+                                                  geoIds = locationsList
                                                   ))),c)))
   
   # Extract attribute types
-  data.attributes <- data.frame(t(sapply(data$attributeTypes,c)))
+  # data.attributes <- data.frame(list(sapply(data$attributeTypes,c)))
   
   # Extract data from geographies
   data.geographies <- data.frame(t(sapply(data$geographies[[1]],c)))
   
   # Extract attribute values
-  data.values <- data.frame(t(sapply(data.geographies$attributes, c)))
+  if (length(attributes) > 1) {
+    data.values <- data.frame(t(sapply(data.geographies$attributes, c)))
+  } else {
+    data.values <- data.frame(unlist(data.geographies$attributes))
+  }
+  
+  # Extract data from nested lists
+  for (i in 1:length(data.values)) {
+    data.values[[i]] <- unlist(data.values[[i]])
+  }
   
   # Set column names to attributes
-  colnames(data.values) <- unlist(data.attributes)
+  colnames(data.values) <- unlist(attributes)
   
   # Create final dataset
   finalData <- cbind(data.geographies, data.values)
@@ -69,6 +84,7 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   factors <- list("geoId", "geoTypeId")
   booleans <- list("isSuppressed")
   numerics <- list("population", "estimate", "SE", "CI_LB95", "CI_UB95", "CV", "MSE")
+  numericsPresent <- numerics[match(attributes, numerics)]
   
   for (i in characters) {
     finalData[[i]] <- as.character(finalData[[i]])
@@ -83,7 +99,7 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   }
   
   suppressWarnings(
-  for (l in numerics) {
+  for (l in numericsPresent) {
     finalData[[l]] <- as.numeric(as.character(finalData[[l]]))
   }
   )
