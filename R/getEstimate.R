@@ -42,9 +42,17 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   url <- paste0("http://askchisne.azure-api.net/api/variable/", indicator)
   
   # Collapse attribute list 
-  attributeList <- paste0(attributes, collapse = ",")
-  locationsList <- paste0(locations, collapse = ",")
+  if (is.null(attributes)) {
+    attributeList <- NULL
+  } else {
+    attributeList <- paste0(attributes, collapse = ",")  
+  }
   
+  if (is.null(locations)) {
+    locationsList <- NULL
+  } else {
+    locationsList <- paste0(locations, collapse = ",")
+  }
   
   data <- data.frame(t(sapply(content(httr::GET(url,
                                                 query = list(
