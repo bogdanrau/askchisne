@@ -100,7 +100,7 @@ The resulting data frame will contain:
 > `getEstimate()` function retrieves estimates as well as additional statistical attributes for one or more requested locations:
 
 ``` r
-geoSearch(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, locations = NULL, apiKey = '<YOUR API KEY>')
+getEstimate(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, locations = NULL, apiKey = '<YOUR API KEY>')
 ```
 
 <table style="width:56%;">

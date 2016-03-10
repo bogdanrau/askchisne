@@ -80,7 +80,7 @@ a legislative district (ASSEMBLY, CONGRESS, SENATE), or the state (STATE).
 > `getEstimate()` function retrieves estimates as well as additional statistical attributes for one or more
 requested locations:
 ```R
-geoSearch(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, locations = NULL, apiKey = '<YOUR API KEY>')
+getEstimate(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, locations = NULL, apiKey = '<YOUR API KEY>')
 ```
 
 Parameter         | Description

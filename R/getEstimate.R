@@ -62,42 +62,32 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
                                                   geoIds = locationsList
                                                   ))),c)))
   
-  # Extract attribute types
-  # data.attributes <- data.frame(list(sapply(data$attributeTypes,c)))
-  
   # Extract data from geographies
   data.geographies <- data.frame(t(sapply(data$geographies[[1]],c)))
   data.geographies$isSuppressed <- as.logical(data.geographies$isSuppressed)
+  data.geographies$geoId <- as.factor(unlist(data.geographies$geoId))
   
-  # Extract non-suppressed
-  data.geographies.nonsuppressed <- dplyr::filter(data.geographies, isSuppressed == FALSE)
-  
-  # Extract suppressed
-  data.geographies.suppressed <- dplyr::filter(data.geographies, isSuppressed == TRUE)
-  
-  # Extract attribute values
-  # For non-suppressed
-  if (length(attributes) > 1 | is.null(attributes)) {
-    data.values <- data.frame(t(sapply(data.geographies.nonsuppressed$attributes, c)))
+  if (is.null(attributes)) {
+    suppressWarnings(
+      data.values <- data.frame(cbind(
+        unlist(data.geographies$geoId),
+        as.data.frame(matrix(as.numeric(t(sapply(data.geographies$attributes, stringi::stri_list2matrix))), ncol = 7))
+      ))
+    )
   } else {
-    data.values <- data.frame(unlist(data.geographies.nonsuppressed$attributes))
+    suppressWarnings(
+      data.values <- data.frame(cbind(
+        unlist(data.geographies$geoId),
+        as.data.frame(matrix(as.numeric(t(sapply(data.geographies$attributes, stringi::stri_list2matrix))), ncol = length(attributes)))
+      ))
+    )
   }
-  
-  # For suppressed
-  if (length(attributes) > 1 | is.null(attributes)) {
-    data.values2 <- data.frame(t(sapply(data.geographies.suppressed$attributes, c)))
-  } else {
-    data.values2 <- data.frame(unlist(data.geographies.suppressed$attributes))
-  }
-  
+
   # Extract data from nested lists
   # For non-suppressed
   for (i in 1:length(data.values)) {
     data.values[[i]] <- unlist(data.values[[i]])
   }
-  
-  data.values <- rbind(data.values, data.values2)
-  
   
   # Set column names to attributes
   characters <- list("geoName", "suppressionReason")
@@ -106,13 +96,14 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   numerics <- list("population", "estimate", "SE", "CI_LB95", "CI_UB95", "CV", "MSE")
   
   if (!is.null(attributes)) {
-  colnames(data.values) <- unlist(attributes)
+  colnames(data.values) <- c("geoId", unlist(attributes))
   } else {
-    colnames(data.values) <- unlist(numerics)
+    colnames(data.values) <- c("geoId", unlist(numerics))
   }
   
   # Create final dataset
-  finalData <- cbind(data.geographies, data.values)
+  finalData <- plyr::join(data.geographies, data.values, by = "geoId")
+
   finalData$attributes <- NULL
   
   # Convert columns to appropriate types

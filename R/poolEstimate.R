@@ -60,7 +60,6 @@ poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
                                                   attributes = attributeList,
                                                   geoIds = locationsList
                                                   ))),c)))
-  
   # Extract attribute types
   data.attributes <- data.frame(t(sapply(data$attributeTypes,c)))
   
@@ -69,6 +68,17 @@ poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
   
   # Extract attribute values
   data.values <- data.frame(t(sapply(data.geographies$attributes, c)))
+  
+  # Convert to numeric
+  if (is.null(attributes)) {
+    for (i in 1:7) {
+      data.values[,i] <- as.numeric(data.values[,i])
+    }
+  } else {
+    for (i in 1:length(attributes)) {
+      data.values[,i] <- as.numeric(data.values[,i])
+    }
+  }
   
   # Set column names to attributes
   colnames(data.values) <- unlist(data.attributes)
@@ -96,8 +106,8 @@ poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
   }
   
   suppressWarnings(
-    for (l in numerics) {
-      finalData[[l]] <- as.numeric(as.character(finalData[[l]]))
+    for (l in attributes) {
+      finalData[[l]]<- as.numeric(as.character(finalData[[l]]))
     }
   )
   

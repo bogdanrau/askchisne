@@ -12,8 +12,14 @@ Description: AskCHIS Neighborhood Edition (or AskCHIS NE) is a data discovery
 URL: https://github.com/bogdanrau/askchisne
 BugReports: https://github.com/bogdanrau/askchisne/issues
 Depends:
-    R (>= 2.10)
+    R (>= 2.10),
+    httr,
+    stringi,
+    plyr
 License: GPL (>= 2)
 LazyData: TRUE
 RoxygenNote: 5.0.1
-Imports: httr
+Imports:
+    stringi,
+    httr,
+    plyr
