@@ -40,11 +40,25 @@ poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
   }
   
   url <- paste0("http://askchisne.azure-api.net/api/variablepool/", indicator)
+  
+  # Collapse attribute list 
+  if (is.null(attributes)) {
+    attributeList <- NULL
+  } else {
+    attributeList <- paste0(attributes, collapse = ",")  
+  }
+  
+  if (is.null(locations)) {
+    locationsList <- NULL
+  } else {
+    locationsList <- paste0(locations, collapse = ",")
+  }
+  
   data <- data.frame(t(sapply(content(httr::GET(url,
                                                 query = list(
                                                   key = apiKey,
-                                                  attributes = attributes,
-                                                  geoIds = locations
+                                                  attributes = attributeList,
+                                                  geoIds = locationsList
                                                   ))),c)))
   
   # Extract attribute types
