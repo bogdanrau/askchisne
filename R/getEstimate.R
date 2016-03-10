@@ -67,18 +67,36 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   
   # Extract data from geographies
   data.geographies <- data.frame(t(sapply(data$geographies[[1]],c)))
+  data.geographies$isSuppressed <- as.logical(data.geographies$isSuppressed)
+  
+  # Extract non-suppressed
+  data.geographies.nonsuppressed <- dplyr::filter(data.geographies, isSuppressed == FALSE)
+  
+  # Extract suppressed
+  data.geographies.suppressed <- dplyr::filter(data.geographies, isSuppressed == TRUE)
   
   # Extract attribute values
+  # For non-suppressed
   if (length(attributes) > 1 | is.null(attributes)) {
-    data.values <- data.frame(t(sapply(data.geographies$attributes, c)))
+    data.values <- data.frame(t(sapply(data.geographies.nonsuppressed$attributes, c)))
   } else {
-    data.values <- data.frame(unlist(data.geographies$attributes))
+    data.values <- data.frame(unlist(data.geographies.nonsuppressed$attributes))
+  }
+  
+  # For suppressed
+  if (length(attributes) > 1 | is.null(attributes)) {
+    data.values2 <- data.frame(t(sapply(data.geographies.suppressed$attributes, c)))
+  } else {
+    data.values2 <- data.frame(unlist(data.geographies.suppressed$attributes))
   }
   
   # Extract data from nested lists
+  # For non-suppressed
   for (i in 1:length(data.values)) {
     data.values[[i]] <- unlist(data.values[[i]])
   }
+  
+  data.values <- rbind(data.values, data.values2)
   
   
   # Set column names to attributes
