@@ -2,9 +2,13 @@
 #' 
 #' This function combines estimates for multiple geographic locations and is especially
 #' useful in combining multiple locations that might have suppressed estimates to get an overall estimate.
+#' @import httr
+#' @import stringi
+#' @import plyr
 #' @param indicator The indicator id (can be obtained using getMetadata()) (required).
 #' @param attributes The specific attributes requested. A comma separated list that can include: estimate, population, SE, CI_L95, CI_U95, CV, MSE. Will return all if not specified (optional).
 #' @param locations The specific locations requested to be pooled. A comma separated list that must include geoIds (can be obtained from geoSearch()) (required).
+#' @param year The year of the data you request. Indicators and years available can be requested through the getMetadata() function. (optional).
 #' @param apiKey Your API key (required).
 #' @keywords askchis chis
 #' @import httr
@@ -12,11 +16,11 @@
 #' @examples 
 #' \dontrun{
 #' poolEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000',
-#' apiKey = '<YOUR API KEY>')
+#' year = NULL, apiKey = '<YOUR API KEY>')
 #' # Returns a data frame with adult obesity estimates and populations for Los Angeles and
 #' # San Diego cities COMBINED.
 #' }
-poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
+poolEstimate <- function(indicator, attributes = NULL, locations, year = NULL, apiKey) {
   
   # Error definitions
   if (missing(apiKey)) {
@@ -54,11 +58,16 @@ poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
     locationsList <- paste0(locations, collapse = ",")
   }
   
+  if (is.null(year)) {
+    warning("No year specified. Returning the most recent data available.", call. = FALSE, immediate. = TRUE)
+  } 
+  
   data <- data.frame(t(sapply(content(httr::GET(url,
                                                 query = list(
                                                   key = apiKey,
                                                   attributes = attributeList,
-                                                  geoIds = locationsList
+                                                  geoIds = locationsList,
+                                                  year = year
                                                   ))),c)))
   # Extract attribute types
   data.attributes <- data.frame(t(sapply(data$attributeTypes,c)))
@@ -69,7 +78,10 @@ poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
   # Extract attribute values
   data.values <- data.frame(t(sapply(data.geographies$attributes, c)))
   
+  
   # Convert to numeric
+  data.values[data.values == 'NULL'] <- NA
+  
   if (is.null(attributes)) {
     for (i in 1:7) {
       data.values[,i] <- as.numeric(data.values[,i])
@@ -85,6 +97,14 @@ poolEstimate <- function(indicator, attributes = NULL, locations, apiKey) {
   
   # Create final dataset
   finalData <- cbind(data.geographies, data.values)
+  
+  # Join in datasetId, year, and unit
+  finalData <- cbind(finalData, data$year, data$unit)
+  
+  # Strip HTML from units
+  finalData$unit <- gsub("<sup>", "", finalData$unit)
+  finalData$unit <- gsub("</sup>", "", finalData$unit)
+  
   finalData$attributes <- NULL
   
   # Convert columns to appropriate types

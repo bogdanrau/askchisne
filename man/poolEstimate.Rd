@@ -4,7 +4,7 @@
 \alias{poolEstimate}
 \title{Pool AskCHIS NE Estimates}
 \usage{
-poolEstimate(indicator, attributes = NULL, locations, apiKey)
+poolEstimate(indicator, attributes = NULL, locations, year = NULL, apiKey)
 }
 \arguments{
 \item{indicator}{The indicator id (can be obtained using getMetadata()) (required).}
@@ -12,6 +12,8 @@ poolEstimate(indicator, attributes = NULL, locations, apiKey)
 \item{attributes}{The specific attributes requested. A comma separated list that can include: estimate, population, SE, CI_L95, CI_U95, CV, MSE. Will return all if not specified (optional).}
 
 \item{locations}{The specific locations requested to be pooled. A comma separated list that must include geoIds (can be obtained from geoSearch()) (required).}
+
+\item{year}{The year of the data you request. Indicators and years available can be requested through the getMetadata() function. (optional).}
 
 \item{apiKey}{Your API key (required).}
 }
@@ -22,7 +24,7 @@ useful in combining multiple locations that might have suppressed estimates to g
 \examples{
 \dontrun{
 poolEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000',
-apiKey = '<YOUR API KEY>')
+year = NULL, apiKey = '<YOUR API KEY>')
 # Returns a data frame with adult obesity estimates and populations for Los Angeles and
 # San Diego cities COMBINED.
 }

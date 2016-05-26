@@ -100,7 +100,7 @@ The resulting data frame will contain:
 > `getEstimate()` function retrieves estimates as well as additional statistical attributes for one or more requested locations:
 
 ``` r
-getEstimate(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, locations = NULL, apiKey = '<YOUR API KEY>')
+getEstimate(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, locations = NULL, year = NULL, apiKey = '<YOUR API KEY>')
 ```
 
 <table style="width:56%;">
@@ -131,6 +131,10 @@ getEstimate(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, lo
 <td align="left">locations</td>
 <td align="left">A comma separated list of geoIds for each location queried (can use the geoSearch() function to obtain those).</td>
 </tr>
+<tr class="odd">
+<td align="left">year</td>
+<td align="left">The year for the data requested. Years available are accessible through the getMetadata() function. If left null, will return the newest data available.</td>
+</tr>
 </tbody>
 </table>
 
@@ -160,12 +164,16 @@ The resulting data frame will contain:
 
 -   `MSE`: the Mean Square Error.
 
+-   `year`: the specific year for which the data was either collected or created.
+
+-   `unit`: the unit of measurement for the estimate.
+
 ------------------------------------------------------------------------
 
 > `poolEstimate()` function combines multiple locations and returns the pooled estimate for those locations.
 
 ``` r
-poolEstimate(indicator = 'INDICATOR NAME', attributes = NULL, locations = 'LIST OF LOCATION geoIds', apyKey = '<YOUR API KEY>')
+poolEstimate(indicator = 'INDICATOR NAME', attributes = NULL, locations = 'LIST OF LOCATION geoIds', year = NULL, apyKey = '<YOUR API KEY>')
 ```
 
 The resulting data frame will contain the same columns as the response from `getEstimate()`. with the difference that `poolEstimate()` returns pooled locations, not individual locations.

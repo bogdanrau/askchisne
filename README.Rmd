@@ -80,7 +80,7 @@ a legislative district (ASSEMBLY, CONGRESS, SENATE), or the state (STATE).
 > `getEstimate()` function retrieves estimates as well as additional statistical attributes for one or more
 requested locations:
 ```R
-getEstimate(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, locations = NULL, apiKey = '<YOUR API KEY>')
+getEstimate(indicator = 'INDICATOR NAME', attributes = NULL, geoLevel = NULL, locations = NULL, year = NULL, apiKey = '<YOUR API KEY>')
 ```
 
 Parameter         | Description
@@ -89,6 +89,7 @@ indicator         | The name of the indicator, which can be obtained using the g
 attributes        | If not specified, returns all available attributes: estimate, population, SE, CI_LB95, CI_UB95, CV, MSE.
 geoLevel          | The level of geography for the query: zcta, cities, counties, assembly, congress, senate, state.
 locations         | A comma separated list of geoIds for each location queried (can use the geoSearch() function to obtain those).
+year              | The year for the data requested. Years available are accessible through the getMetadata() function. If left null, will return the newest data available.
 
 The resulting data frame will contain:
 
@@ -116,11 +117,15 @@ The resulting data frame will contain:
 
 * `MSE`: the Mean Square Error.
 
+* `year`: the specific year for which the data was either collected or created.
+
+* `unit`: the unit of measurement for the estimate.
+
 ***
 
 > `poolEstimate()` function combines multiple locations and returns the pooled estimate for those locations.
 ```r
-poolEstimate(indicator = 'INDICATOR NAME', attributes = NULL, locations = 'LIST OF LOCATION geoIds', apyKey = '<YOUR API KEY>')
+poolEstimate(indicator = 'INDICATOR NAME', attributes = NULL, locations = 'LIST OF LOCATION geoIds', year = NULL, apyKey = '<YOUR API KEY>')
 ```
 
 The resulting data frame will contain the same columns as the response from `getEstimate()`. with the difference that `poolEstimate()` returns pooled locations, not individual locations.

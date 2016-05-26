@@ -2,21 +2,25 @@
 #' 
 #' This function gets data from the AskCHIS NE API. If attributes = null, it will
 #' return the population, estimate, as well as other statistical attributes.
+#' @import httr
+#' @import stringi
+#' @import plyr
 #' @param indicator The indicator id (can be obtained using getMetadata()) (required).
 #' @param attributes The specific attributes requested. A comma separated list that can include: estimate, population, SE, CI_L95, CI_U95, CV, MSE. Will return all if not specified (optional).
 #' @param geoLevel The specific level of geography requested. A list that can include: zcta, cities, counties, assembly, congress, senate, state (optional).
 #' @param locations The specific locations requested. A comma separated list that must include geoIds (can be obtained from geoSearch()) (optional).
+#' @param year The year of the data you request. Indicators and years available can be requested through the getMetadata() function. (optional).
 #' @param apiKey Your API key (required).
 #' @keywords askchis chis
 #' @export
 #' @examples 
 #' \dontrun{
 #' getEstimate(indicator = 'OBESEA', attributes = list("estimate", "population"), locations = list("666000", "644000"),
-#'  apiKey = '<YOUR API KEY>')
+#'  year = 2014, apiKey = '<YOUR API KEY>')
 #' # Returns a data frame with adult obesity estimates and populations for Los Angeles and
 #' # San Diego cities.
 #' }
-getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations = NULL, apiKey) {
+getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations = NULL, year = NULL, apiKey) {
   
   # Error definitions
   if (missing(apiKey)) {
@@ -54,16 +58,21 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
     locationsList <- paste0(locations, collapse = ",")
   }
   
+  if (is.null(year)) {
+    warning("No year specified. Returning the most recent data available.", call. = FALSE, immediate. = TRUE)
+  } 
+  
   data <- data.frame(t(sapply(content(httr::GET(url,
                                                 query = list(
                                                   key = apiKey,
                                                   attributes = attributeList,
                                                   geoType = geoLevel,
-                                                  geoIds = locationsList
+                                                  geoIds = locationsList,
+                                                  year = year
                                                   ))),c)))
   
   # Extract data from geographies
-  data.geographies <- data.frame(t(sapply(data$geographies[[1]],c)))
+  data.geographies <- data.frame(t(sapply(data$geographies[[1]], c)))
   data.geographies$isSuppressed <- as.logical(data.geographies$isSuppressed)
   data.geographies$geoId <- as.factor(unlist(data.geographies$geoId))
   
@@ -103,6 +112,13 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   
   # Create final dataset
   finalData <- plyr::join(data.geographies, data.values, by = "geoId")
+  
+  # Join in datasetId, year, and unit
+  finalData <- cbind(finalData, data$year, data$unit)
+  
+  # Strip HTML from units
+  finalData$unit <- gsub("<sup>", "", finalData$unit)
+  finalData$unit <- gsub("</sup>", "", finalData$unit)
 
   finalData$attributes <- NULL
   

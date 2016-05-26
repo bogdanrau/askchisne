@@ -2,6 +2,9 @@
 #' 
 #' Use this function to search for locations within the AskCHIS NE database
 #' by name and obtain geoId, and location type.
+#' @import httr
+#' @import stringi
+#' @import plyr
 #' @param search Search term (required).
 #' @param apiKey Your API key (required). 
 #' @keywords askchis chis
