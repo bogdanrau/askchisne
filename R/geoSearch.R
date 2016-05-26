@@ -34,5 +34,15 @@ geoSearch <- function(search, apiKey) {
   data <- data.frame(t(sapply(content(httr::GET(url, query = list(searchTerm = search, key = apiKey)), as = "parsed"), c)))
   removeCols <- c("year", "totalPopulation", "variables")
   data <- data[, !(names(data) %in% removeCols)]
+  
+  temp <- as.data.frame(matrix(unlist(data), nrow=length(unlist(data[1]))))
+  colnames(temp) <- colnames(data)
+  
+  for (i in 1:length(temp)) {
+    temp[,i] <- as.character(temp[,i])
+  }
+  
+  data <- temp
+  
   return(data)
 }
