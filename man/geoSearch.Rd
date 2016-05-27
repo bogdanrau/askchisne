@@ -4,7 +4,7 @@
 \alias{geoSearch}
 \title{Search locations by name}
 \usage{
-geoSearch(search, apiKey)
+geoSearch(search, apiKey = getOption("askchisne.apiKey"))
 }
 \arguments{
 \item{search}{Search term (required).}

@@ -4,7 +4,8 @@
 \alias{poolEstimate}
 \title{Pool AskCHIS NE Estimates}
 \usage{
-poolEstimate(indicator, attributes = NULL, locations, year = NULL, apiKey)
+poolEstimate(indicator, attributes = NULL, locations, year = NULL,
+  apiKey = getOption("askchisne.apiKey"))
 }
 \arguments{
 \item{indicator}{The indicator id (can be obtained using getMetadata()) (required).}
@@ -23,8 +24,8 @@ useful in combining multiple locations that might have suppressed estimates to g
 }
 \examples{
 \dontrun{
-poolEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000',
-year = NULL, apiKey = '<YOUR API KEY>')
+poolEstimate(indicator = 'OBESEA', attributes = c("estimate", "population"), locations = c("666000", "644000"),
+year = 2014, apiKey = '<YOUR API KEY>')
 # Returns a data frame with adult obesity estimates and populations for Los Angeles and
 # San Diego cities COMBINED.
 }

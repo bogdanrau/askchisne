@@ -4,7 +4,7 @@
 \alias{getMetadata}
 \title{Get AskCHIS NE Metadata}
 \usage{
-getMetadata(apiKey)
+getMetadata(apiKey = getOption("askchisne.apiKey"))
 }
 \arguments{
 \item{apiKey}{Your API key (required).}
