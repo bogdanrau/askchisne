@@ -5,7 +5,7 @@
 \title{Get AskCHIS NE Estimates}
 \usage{
 getEstimate(indicator, attributes = NULL, geoLevel = NULL,
-  locations = NULL, year = NULL, apiKey)
+  locations = NULL, year = NULL, apiKey = getOption("askchisne.apiKey"))
 }
 \arguments{
 \item{indicator}{The indicator id (can be obtained using getMetadata()) (required).}
@@ -24,10 +24,13 @@ getEstimate(indicator, attributes = NULL, geoLevel = NULL,
 This function gets data from the AskCHIS NE API. If attributes = null, it will
 return the population, estimate, as well as other statistical attributes.
 }
+\note{
+\code{geoLevel} and \code{locations} cannot be used together.
+}
 \examples{
 \dontrun{
-getEstimate(indicator = 'OBESEA', attributes = list("estimate", "population"), locations = list("666000", "644000"),
- year = 2014, apiKey = '<YOUR API KEY>')
+getEstimate(indicator = 'OBESEA', attributes = c("estimate", "population"),
+ locations = c("666000", "644000"), year = 2014, apiKey = '<YOUR API KEY>')
 # Returns a data frame with adult obesity estimates and populations for Los Angeles and
 # San Diego cities.
 }
