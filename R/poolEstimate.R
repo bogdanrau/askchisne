@@ -15,8 +15,8 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' poolEstimate(indicator = 'OBESEA', attributes = 'estimate,population', locations = '666000,644000',
-#' year = NULL, apiKey = '<YOUR API KEY>')
+#' poolEstimate(indicator = 'OBESEA', attributes = c("estimate", "population"), locations = c("666000", "644000"),
+#' year = 2014, apiKey = '<YOUR API KEY>')
 #' # Returns a data frame with adult obesity estimates and populations for Los Angeles and
 #' # San Diego cities COMBINED.
 #' }
