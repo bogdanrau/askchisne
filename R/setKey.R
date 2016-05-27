@@ -11,5 +11,10 @@
 #' }
 
 setKey <- function(apiKey) {
+
+  if (missing(apiKey)) {
+    stop("NO API KEY: You did not specify an API key. If you don't already have one, please contact askchis@ucla.edu to obtain an API key.", call. = FALSE)
+  }
+
   options(askchisne.apiKey = apiKey)
 }
