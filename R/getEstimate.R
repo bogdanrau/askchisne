@@ -62,7 +62,7 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
     warning("No year specified. Returning the most recent data available.", call. = FALSE, immediate. = TRUE)
   }
 
-  data <- data.frame(t(sapply(content(httr::GET(url,
+  data <- data.frame(t(sapply(httr::content(httr::GET(url,
                                                 query = list(
                                                   key = apiKey,
                                                   attributes = attributeList,
