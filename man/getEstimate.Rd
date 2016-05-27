@@ -24,6 +24,9 @@ getEstimate(indicator, attributes = NULL, geoLevel = NULL,
 This function gets data from the AskCHIS NE API. If attributes = null, it will
 return the population, estimate, as well as other statistical attributes.
 }
+\note{
+\code{geoLevel} and \code{locations} cannot be used together.
+}
 \examples{
 \dontrun{
 getEstimate(indicator = 'OBESEA', attributes = c("estimate", "population"),

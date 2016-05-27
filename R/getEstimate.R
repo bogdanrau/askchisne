@@ -12,6 +12,7 @@
 #' @param year The year of the data you request. Indicators and years available can be requested through the getMetadata() function. (optional).
 #' @param apiKey Your API key (required).
 #' @keywords askchis chis
+#' @note \code{geoLevel} and \code{locations} cannot be used together.
 #' @export
 #' @examples
 #' \dontrun{
@@ -33,6 +34,10 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
 
   if (indicator == "") {
     stop("EMPTY INDICATOR TERM: Your indicator parameter was empty. Please specify a value for the indicator parameter.")
+  }
+
+  if (!missing(geoLevel) && !missing(locations)) {
+    stop("GEOLEVEL AND LOCATIONS USED: You specified both geoLevel and locations. Please choose one of those two parameters.")
   }
 
   if (is.null(attributes)) {

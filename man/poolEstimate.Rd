@@ -22,6 +22,9 @@ poolEstimate(indicator, attributes = NULL, locations, year = NULL,
 This function combines estimates for multiple geographic locations and is especially
 useful in combining multiple locations that might have suppressed estimates to get an overall estimate.
 }
+\note{
+\code{geoLevel} and \code{locations} cannot be used together.
+}
 \examples{
 \dontrun{
 poolEstimate(indicator = 'OBESEA', attributes = c("estimate", "population"), locations = c("666000", "644000"),
