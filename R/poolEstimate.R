@@ -20,10 +20,10 @@
 #' # Returns a data frame with adult obesity estimates and populations for Los Angeles and
 #' # San Diego cities COMBINED.
 #' }
-poolEstimate <- function(indicator, attributes = NULL, locations, year = NULL, apiKey) {
+poolEstimate <- function(indicator, attributes = NULL, locations, year = NULL, apiKey = getOption("askchisne.apiKey")) {
 
   # Error definitions
-  if (missing(apiKey)) {
+  if (is.null(apiKey)) {
     stop("NO API KEY: You did not specify an API key. If you don't already have one, please contact askchis@ucla.edu to obtain an API key.", call. = FALSE)
   }
 

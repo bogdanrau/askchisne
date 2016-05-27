@@ -15,10 +15,9 @@
 #' geoSearch(search = 'Los Angeles', apiKey = '<YOUR API KEY>')
 #' # Returns a data frame with all locations that match 'Los Angeles.'
 #' }
-geoSearch <- function(search, apiKey) {
-
+geoSearch <- function(search, apiKey = getOption("askchisne.apiKey")) {
   # Error definitions
-  if (missing(apiKey)) {
+  if (is.null(apiKey)) {
     stop("NO API KEY: You did not specify an API key. If you don't already have one, please contact askchis@ucla.edu to obtain an API key.", call. = FALSE)
   }
 

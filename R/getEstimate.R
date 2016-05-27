@@ -15,15 +15,15 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' getEstimate(indicator = 'OBESEA', attributes = c("estimate", "population"), locations = c("666000", "644000"),
-#'  year = 2014, apiKey = '<YOUR API KEY>')
+#' getEstimate(indicator = 'OBESEA', attributes = c("estimate", "population"),
+#'  locations = c("666000", "644000"), year = 2014, apiKey = '<YOUR API KEY>')
 #' # Returns a data frame with adult obesity estimates and populations for Los Angeles and
 #' # San Diego cities.
 #' }
-getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations = NULL, year = NULL, apiKey) {
+getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations = NULL, year = NULL, apiKey = getOption("askchisne.apiKey")) {
 
   # Error definitions
-  if (missing(apiKey)) {
+  if (is.null(apiKey)) {
     stop("NO API KEY: You did not specify an API key. If you don't already have one, please contact askchis@ucla.edu to obtain an API key.", call. = FALSE)
   }
 
