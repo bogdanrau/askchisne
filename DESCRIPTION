@@ -1,7 +1,7 @@
 Package: askchisne
 Type: Package
 Title: Get estimates from the AskCHIS NE API
-Version: 0.1.1
+Version: 0.2.0
 Author: Bogdan Rau
 Maintainer: Bogdan Rau <bogdan.rau@gmail.com>
 Description: AskCHIS Neighborhood Edition (or AskCHIS NE) is a data discovery
@@ -12,10 +12,7 @@ Description: AskCHIS Neighborhood Edition (or AskCHIS NE) is a data discovery
 URL: https://github.com/bogdanrau/askchisne
 BugReports: https://github.com/bogdanrau/askchisne/issues
 Depends:
-    R (>= 2.10),
-    httr,
-    stringi,
-    plyr
+    R (>= 2.10)
 License: GPL (>= 2)
 LazyData: TRUE
 RoxygenNote: 5.0.1
