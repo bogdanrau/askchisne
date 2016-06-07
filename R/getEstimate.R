@@ -111,7 +111,7 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   booleans <- list("isSuppressed")
   numerics <- list("population", "estimate", "SE", "CI_LB95", "CI_UB95", "CV", "MSE")
   
-  if (data$category != 'Health Topuc') {
+  if (data$category != 'Health Topic') {
     colnames(data.values) <- c("geoId", "population", "estimate")
   } else if (!is.null(attributes)) {
   colnames(data.values) <- c("geoId", unlist(attributes))
