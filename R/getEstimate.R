@@ -76,7 +76,14 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   data.geographies$isSuppressed <- as.logical(data.geographies$isSuppressed)
   data.geographies$geoId <- as.factor(unlist(data.geographies$geoId))
   
-  if (is.null(attributes)) {
+  if (data$category != 'Health Topic') {
+    suppressWarnings(
+      data.values <- data.frame(cbind(
+        unlist(data.geographies$geoId),
+        as.data.frame(matrix(as.numeric(t(sapply(data.geographies$attributes, stringi::stri_list2matrix))), ncol = 2))
+      ))
+    )
+  } else if (is.null(attributes)) {
     suppressWarnings(
       data.values <- data.frame(cbind(
         unlist(data.geographies$geoId),
@@ -104,7 +111,9 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   booleans <- list("isSuppressed")
   numerics <- list("population", "estimate", "SE", "CI_LB95", "CI_UB95", "CV", "MSE")
   
-  if (!is.null(attributes)) {
+  if (data$category != 'Health Topuc') {
+    colnames(data.values) <- c("geoId", "population", "estimate")
+  } else if (!is.null(attributes)) {
   colnames(data.values) <- c("geoId", unlist(attributes))
   } else {
     colnames(data.values) <- c("geoId", unlist(numerics))
@@ -124,7 +133,9 @@ getEstimate <- function(indicator, attributes = NULL, geoLevel = NULL, locations
   
   # Convert columns to appropriate types
   
-  if (is.null(attributes)) {
+  if (data$category != 'Health Topic') {
+    numericsPresent <- list("population", "estimate")
+  } else if (is.null(attributes)) {
     numericsPresent <- numerics
   } else {
     numericsPresent <- numerics[match(attributes, numerics)]

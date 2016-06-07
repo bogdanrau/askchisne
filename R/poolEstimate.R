@@ -82,7 +82,11 @@ poolEstimate <- function(indicator, attributes = NULL, locations, year = NULL, a
   # Convert to numeric
   data.values[data.values == 'NULL'] <- NA
   
-  if (is.null(attributes)) {
+  if (data$category != 'Health Topic') {
+    for (i in 1:2) {
+      data.values[,i] <- as.numeric(data.values[,i])
+    }
+  } else if (is.null(attributes)) {
     for (i in 1:7) {
       data.values[,i] <- as.numeric(data.values[,i])
     }
